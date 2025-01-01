@@ -1,15 +1,19 @@
 import React, { useEffect, useState } from "react";
 import { BrowserRouter as Router, Route, Routes, Link } from "react-router-dom";
 import "./App.css";
+import ArticlesList from "./ArticlesList";
 
-interface Blog {
+interface Article {
   id: string;
   title: string;
-  body: string;
+  content: string;
+  eyecatch: { url: string; height: number; width: number };
+  category: { name: string };
 }
 
 const App: React.FC = () => {
-  const [blogs, setBlogs] = useState<Blog[]>([]);
+  const [articles] = useState<Article[]>([]); // 記事データ
+  const [blogs, setBlogs] = useState<Article[]>([]); // ブログデータ
   const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
@@ -23,8 +27,8 @@ const App: React.FC = () => {
             },
           }
         );
-        const data = await response.json();
-        setBlogs(data.contents);
+        const blogData = await response.json();
+        setBlogs(blogData.contents);
         setLoading(false);
       } catch (error) {
         console.error("Error fetching blog data:", error);
@@ -58,7 +62,8 @@ const App: React.FC = () => {
                     {blog.title}
                   </Link>
                 </h2>
-                <p>{blog.body}</p>
+                <p>{blog.content}</p> {/* blog.bodyからblog.contentに修正 */}
+                <ArticlesList articles={articles} />
               </div>
             ))
           )}
@@ -74,7 +79,7 @@ const App: React.FC = () => {
 };
 
 const BlogDetail: React.FC = () => {
-  const [blog, setBlog] = useState<Blog | null>(null);
+  const [blog, setBlog] = useState<Article | null>(null);
   const blogId = window.location.pathname.split("/")[2]; // URLからIDを取得
 
   useEffect(() => {
@@ -103,7 +108,7 @@ const BlogDetail: React.FC = () => {
   return (
     <div className="blog-detail">
       <h2>{blog.title}</h2>
-      <p>{blog.body}</p>
+      <p>{blog.content}</p> {/* blog.bodyからblog.contentに修正 */}
     </div>
   );
 };

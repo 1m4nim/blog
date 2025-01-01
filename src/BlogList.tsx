@@ -1,6 +1,5 @@
-// BlogList.tsx
 import { useState, useEffect } from "react";
-import { Link } from "react-router-dom"; // Link コンポーネントを使用して遷移
+import { Link } from "react-router-dom";
 
 interface Post {
   id: string;
@@ -9,20 +8,29 @@ interface Post {
 
 const BlogList = () => {
   const [posts, setPosts] = useState<Post[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
     const fetchPosts = async () => {
-      const res = await fetch("https://3wm94pke18.microcms.io/apis/blogs", {
-        headers: {
-          "X-API-KEY": "X8WxIKj3l8ttXbqQ5V4q8zXXyQWV5Rc5aW2H", // ここに実際のAPIキーを入力
-        },
-      });
-      const data = await res.json();
-      setPosts(data.contents); // APIレスポンスの中から記事のリストを設定
+      try {
+        const res = await fetch("https://3wm94pke18.microcms.io/api/v1/blogs", {
+          headers: {
+            "X-MICROCMS-API-KEY": "X8WxIKj3l8ttXbqQ5V4q8zXXyQWV5Rc5aW2H",
+          },
+        });
+        const data = await res.json();
+        setPosts(data.contents);
+        setLoading(false);
+      } catch (error) {
+        console.error("Failed to fetch posts:", error);
+        setLoading(false);
+      }
     };
 
     fetchPosts();
   }, []);
+
+  if (loading) return <p>Loading...</p>;
 
   return (
     <div>
@@ -30,8 +38,7 @@ const BlogList = () => {
       <ul>
         {posts.map((post) => (
           <li key={post.id}>
-            {/* postIdをLinkのURLパラメータとして渡す */}
-            <Link to={`/post/${post.id}`}>{post.title}</Link>
+            <Link to={`/blog/${post.id}`}>{post.title}</Link>
           </li>
         ))}
       </ul>
