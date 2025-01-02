@@ -25,7 +25,6 @@ const ArticlesList: React.FC<ArticlesListProps> = ({ articles }) => {
     <div>
       {/* 記事一覧を表示 */}
       <div>
-        <h2>記事一覧</h2>
         <ul>
           {articles.map((article) => (
             <li key={article.id}>
