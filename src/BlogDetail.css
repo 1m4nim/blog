@@ -4,10 +4,11 @@ div {
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+
 }
 
 .title {
-    font-size: 3rem;
+    font-size: 5rem;
     font-weight: bold;
     color: #333;
     background-color: bisque;
@@ -17,7 +18,7 @@ div {
 }
 
 .content {
-    font-size: 1.5rem;
+    font-size: 2rem;
     color: #555;
     line-height: 1.8;
     text-align: justify;
