@@ -14,7 +14,7 @@ const Home: React.FC<{ blogs: Article[]; loading: boolean }> = ({
 }) => {
   return (
     <div className="home">
-      <div className="self-caption">
+      <div className="self-introduction">
         <h1 className="blog">1m4nimのBlog</h1>
         <p className="caption">ここに書いていくものはすべてフィクションです</p>
       </div>
