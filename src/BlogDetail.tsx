@@ -13,7 +13,6 @@ const BlogDetail: React.FC = () => {
   const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
-    console.log("Fetched ID:", id); // IDをログに出力
     const fetchBlog = async () => {
       try {
         const response = await fetch(
@@ -26,8 +25,7 @@ const BlogDetail: React.FC = () => {
         );
 
         if (!response.ok) {
-          console.error(`Error: ${response.status} ${response.statusText}`);
-          throw new Error(`Failed to fetch blog: ${response.status}`);
+          throw new Error(`HTTP error! Status: ${response.status}`);
         }
 
         const data = await response.json();
@@ -48,15 +46,13 @@ const BlogDetail: React.FC = () => {
 
   if (!blog) return <p>記事が見つかりませんでした。</p>;
 
-  const stripHtmlTags = (html: string): string => {
-    const doc = new DOMParser().parseFromString(html, "text/html");
-    return doc.body.textContent || "";
-  };
-
   return (
     <div className="blog-post">
       <h2 className="title">{blog.title}</h2>
-      <p className="content">{stripHtmlTags(blog.content)}</p>
+      <div
+        className="content"
+        dangerouslySetInnerHTML={{ __html: blog.content }}
+      ></div>
     </div>
   );
 };
