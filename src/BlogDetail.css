@@ -1,0 +1,51 @@
+div {
+    max-width: 800px;
+    margin: 50px auto;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.title {
+    font-size: 6rem;
+    font-weight: bold;
+    color: #333;
+    background-color: bisque;
+    text-align: center;
+    margin-bottom: 20px;
+    line-height: 1.4;
+}
+
+.content {
+    font-size: 2rem;
+    color: white;
+    line-height: 1.8;
+    text-align: justify;
+    white-space: pre-line;
+}
+
+p {
+    text-align: center;
+    font-size: 1.2rem;
+    color: #888;
+}
+
+.blog-post {
+    background-color: burlywood;
+    padding: 20px;
+}
+
+/* モバイル対応 */
+@media (max-width: 768px) {
+    div {
+        padding: 15px;
+    }
+
+    .title {
+        font-size: 3rem;
+    }
+
+    .content {
+        font-size: 1.5rem;
+    }
+}

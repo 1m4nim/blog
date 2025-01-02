@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import "./BlogDetail.css";
 
 interface Blog {
   title: string;
@@ -44,9 +45,9 @@ const BlogDetail: React.FC = () => {
   };
 
   return (
-    <div>
-      <h2>{blog.title}</h2>
-      <p>{stripHtmlTags(blog.content)}</p>
+    <div className="blog-post">
+      <h2 className="title">{blog.title}</h2>
+      <p className="content">{stripHtmlTags(blog.content)}</p>
     </div>
   );
 };
