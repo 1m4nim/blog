@@ -13,6 +13,7 @@ const BlogDetail: React.FC = () => {
   const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
+    console.log("Fetched ID:", id); // IDをログに出力
     const fetchBlog = async () => {
       try {
         const response = await fetch(
@@ -23,16 +24,24 @@ const BlogDetail: React.FC = () => {
             },
           }
         );
+
+        if (!response.ok) {
+          console.error(`Error: ${response.status} ${response.statusText}`);
+          throw new Error(`Failed to fetch blog: ${response.status}`);
+        }
+
         const data = await response.json();
         setBlog(data);
-        setLoading(false);
       } catch (error) {
         console.error("Error fetching blog detail:", error);
+      } finally {
         setLoading(false);
       }
     };
 
-    fetchBlog();
+    if (id) {
+      fetchBlog();
+    }
   }, [id]);
 
   if (loading) return <p>Loading...</p>;
