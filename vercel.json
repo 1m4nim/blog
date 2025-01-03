@@ -6,14 +6,14 @@
       "use": "@vercel/node"
     },
     {
-      "src": "src/**/*.ts",
+      "src": "src/**/*.{ts,tsx}",
       "use": "@vercel/static-build"
     }
   ],
   "rewrites": [
     {
       "source": "/api/:path*",
-      "destination": "https://blog-git-main-1m4nims-projects.vercel.app/:path*"
+      "destination": "https://your-backend-vercel-url.vercel.app/:path*"
     },
     {
       "source": "/(.*)",
